@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vistaar_assignment_app/model/movie_data.dart';
 
 Widget text({
   required String text,
@@ -121,6 +122,102 @@ Widget autoSizeTextV({
       color: color,
       fontSize: fontSize,
       fontWeight: fontWeight,
+    ),
+  );
+}
+
+Widget movieCard(MovieData movieData) {
+  return Card(
+    color: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(12),
+      side: const BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+                "https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgxMjkxNjk3NDQ4ODI4/marveldisney.jpg"),
+          ),
+          const SizedBox(
+            height: 2,
+          ),
+          autoSizeTextV(
+            text: movieData.title ?? "None",
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            maxLines: 2,
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          text(
+            text: "Release Date:",
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
+          text(
+            text: "${movieData.month}, ${movieData.year}",
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+          const SizedBox(
+            height: 12,
+          ),
+          text(
+            text: "Run Time:",
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
+          text(
+            text: "${movieData.runtime.toString()} mins",
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget filterContainer({required String textV, required bool value}) {
+  return Container(
+    width: 85,
+    height: 35,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(
+        25,
+      ),
+      color: const Color(0xFFd9d9d9),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        text(
+          text: textV,
+          color: Colors.black,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
+        value
+            ? const Icon(
+                Icons.arrow_upward_outlined,
+              )
+            : const Icon(
+                Icons.arrow_downward_outlined,
+              )
+      ],
     ),
   );
 }

@@ -51,98 +51,46 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         actions: [
           GestureDetector(
-            onTap: () {
-              setState(() {
-                filter1 = filter1 ? false : true;
-                if (filter1) {
-                  movieList
-                      .sort((a, b) => a!.year ?? 0.compareTo(b!.year ?? 0));
-                } else {
-                  movieList
-                      .sort((a, b) => b!.year ?? 0.compareTo(a!.year ?? 0));
-                }
-              });
-            },
-            child: Container(
-              width: 85,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  25,
-                ),
-                color: const Color(0xFFd9d9d9),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  text(
-                    text: "Year",
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  filter1
-                      ? const Icon(
-                          Icons.arrow_upward_outlined,
-                        )
-                      : const Icon(
-                          Icons.arrow_downward_outlined,
-                        )
-                ],
-              ),
-            ),
-          ),
+              onTap: () {
+                setState(() {
+                  filter1 = filter1 ? false : true;
+                  if (filter1) {
+                    movieList
+                        .sort((a, b) => a!.year ?? 0.compareTo(b!.year ?? 0));
+                  } else {
+                    movieList
+                        .sort((a, b) => b!.year ?? 0.compareTo(a!.year ?? 0));
+                  }
+                });
+              },
+              child: filterContainer(textV: "Year", value: filter1)),
           const SizedBox(
             width: 15,
           ),
           GestureDetector(
-            onTap: () {
-              setState(
-                () {
-                  filter2 = filter2 ? false : true;
-                  if (filter2) {
-                    movieList.sort((a, b) {
-                      var a1 = a!.runtime?.toInt() ?? 0;
-                      var b1 = b!.runtime?.toInt() ?? 0;
+              onTap: () {
+                setState(
+                  () {
+                    filter2 = filter2 ? false : true;
+                    if (filter2) {
+                      movieList.sort((a, b) {
+                        var a1 = a!.runtime?.toInt() ?? 0;
+                        var b1 = b!.runtime?.toInt() ?? 0;
 
-                      return a1 - b1;
-                    });
-                  } else {
-                    movieList.sort((a, b) {
-                      var a1 = a!.runtime?.toInt() ?? 0;
-                      var b1 = b!.runtime?.toInt() ?? 0;
+                        return a1 - b1;
+                      });
+                    } else {
+                      movieList.sort((a, b) {
+                        var a1 = a!.runtime?.toInt() ?? 0;
+                        var b1 = b!.runtime?.toInt() ?? 0;
 
-                      return b1 - a1;
-                    });
-                  }
-                },
-              );
-            },
-            child: Container(
-              width: 85,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  25,
-                ),
-                color: const Color(0xFFd9d9d9),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  text(
-                    text: "Runtime",
-                    color: Colors.black,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  filter2
-                      ? const Icon(Icons.arrow_upward_outlined)
-                      : const Icon(Icons.arrow_downward_outlined)
-                ],
-              ),
-            ),
-          ),
+                        return b1 - a1;
+                      });
+                    }
+                  },
+                );
+              },
+              child: filterContainer(textV: "Runtime", value: filter2)),
           const SizedBox(
             width: 15,
           ),
@@ -174,70 +122,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         Navigator.pushNamed(context, RouteName.detailScreen,
                             arguments: movieList[index]);
                       },
-                      child: Card(
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          side: const BorderSide(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
-                                    "https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgxMjkxNjk3NDQ4ODI4/marveldisney.jpg"),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              autoSizeTextV(
-                                text: movieList[index]!.title ?? "None",
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                maxLines: 2,
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              text(
-                                text: "Release Date:",
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              text(
-                                text:
-                                    "${movieList[index]!.month}, ${movieList[index]!.year}",
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              text(
-                                text: "Run Time:",
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                              ),
-                              text(
-                                text:
-                                    "${movieList[index]!.runtime.toString()} mins",
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      child: movieCard(movieList[index]!),
                     );
                   },
                 ),
