@@ -112,7 +112,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   itemCount: movieList.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: (1 / 1.95),
+                    childAspectRatio: (1 / 1.6),
                     crossAxisSpacing: 15.0,
                     mainAxisSpacing: 25.0,
                   ),

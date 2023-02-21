@@ -7,3 +7,5 @@ const String errorBadRequest = 'errorBadRequest';
 const String errorRequestNotFound = 'errorRequestNotFound';
 const String errorIntenalServer = 'errorIntenalServer';
 const String errorSomethingWentWrong = 'errorSomethingWentWrong';
+
+const String baseImgUrl = "https://showdigital.in/flutter-json/";

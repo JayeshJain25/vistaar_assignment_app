@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vistaar_assignment_app/model/movie_data.dart';
+import 'package:vistaar_assignment_app/utils/constants.dart';
 import 'package:vistaar_assignment_app/widgets/common_widget.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -29,8 +30,7 @@ class DetailsScreen extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                    "https://parade.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTgxMjkxNjk3NDQ4ODI4/marveldisney.jpg"),
+                child: Image.network("$baseImgUrl${movieData.img}"),
               ),
               const SizedBox(
                 height: 15,
